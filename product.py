@@ -2,11 +2,11 @@
 class Product:
     _products_list = list()
 
-    def __init__(self, id, tittle, short_description, description, slug, permalink, IsAvailable, 
+    def __init__(self, id, title, short_description, description, slug, permalink, IsAvailable, 
                  sku, price, regular_price, sale_price, manage_stock, stock_quantity, 
                  IsVisible, date_created_gmt, date_modified_gmt):
-        self.__id = id
-        self.tittle = tittle
+        self._id = id
+        self.title = title
         self.short_description = short_description
         self.description = description
         self.slug = slug
@@ -24,7 +24,7 @@ class Product:
         
         
     def __repr__(self):
-        return f"Product('{self.title}','{self.description}')"
+        return f"Product('{self._id}','{self.title}','{self.description}')"
     
     def create(self):
         self._products_list.append(self)

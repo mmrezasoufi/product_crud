@@ -1,11 +1,11 @@
 
 class Product:
     _products_list = list()
-    
+
     def __init__(self, id, tittle, short_description, description, slug, permalink, IsAvailable, 
                  sku, price, regular_price, sale_price, manage_stock, stock_quantity, 
                  IsVisible, date_created_gmt, date_modified_gmt):
-        self.id = id
+        self.__id = id
         self.tittle = tittle
         self.short_description = short_description
         self.description = description
@@ -27,13 +27,22 @@ class Product:
         return f"Product('{self.title}','{self.description}')"
     
     def create(self):
-        pass
-    
+        self._products_list.append(self)
+        
     def read(self):
         pass
     
-    def update(self):
-        pass
-    
-    def delete(self, id):
-        pass
+    def update(self, new_product):
+        for i in range(len(self._products_list)):
+            if self._products_list[i] == self :
+                self._products_list[i] = new_product
+                break
+                
+    def delete(self):
+        self._products_list.remove(self)
+
+    def get_all_products(self):
+        for product in self._products_list :
+            print(product)
+            
+        

@@ -2,9 +2,9 @@
 class Product:
     _products_list = list()
 
-    def __init__(self, id, title, short_description, description, slug, permalink, IsAvailable, 
-                 sku, price, regular_price, sale_price, manage_stock, stock_quantity, 
-                 IsVisible, date_created_gmt, date_modified_gmt):
+    def __init__(self, id:int, title:str, short_description:str, description:str, slug:int, permalink:str, IsAvailable:bool, 
+                 sku:str, price:int, regular_price:int, sale_price:int, manage_stock:int, stock_quantity:int, 
+                 IsVisible:bool, date_created_gmt, date_modified_gmt):
         self._id = id
         self.title = title
         self.short_description = short_description
@@ -28,15 +28,16 @@ class Product:
     
     def create(self):
         self._products_list.append(self)
+        return self.__repr__()
         
     def read(self):
-        pass
+        self.__repr__()
     
     def update(self, new_product):
         for i in range(len(self._products_list)):
             if self._products_list[i] == self :
                 self._products_list[i] = new_product
-                break
+                return self._products_list[i].__repr__()
                 
     def delete(self):
         self._products_list.remove(self)

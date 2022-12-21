@@ -42,6 +42,7 @@ class Product:
     def delete(self):
         self._products_list.remove(self)
 
+
     def get_all_products(self):
         for product in self._products_list :
             print(product)

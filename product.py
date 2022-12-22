@@ -22,26 +22,36 @@ class Product:
         self.date_created_gmt = date_created_gmt
         self.date_modified_gmt =  date_modified_gmt
         
+        self.IsExisted = False
+        
         
     def __repr__(self):
         return f"Product('{self._id}','{self.title}','{self.description}')"
     
     def create(self):
-        self._products_list.append(self)
-        return self.__repr__()
+        if not(self.IsExisted):
+            self._products_list.append(self)
+            return self.__repr__()
+        self.IsExisted = True
         
     def read(self):
-        self.__repr__()
+        return self.__repr__()
     
     def update(self, new_product):
+        temp = self.IsExisted
         for i in range(len(self._products_list)):
             if self._products_list[i] == self :
                 self._products_list[i] = new_product
+                self = new_product
+                if temp:
+                    self.create()
                 return self._products_list[i].__repr__()
                 
     def delete(self):
-        self._products_list.remove(self)
-
+        if self.IsExisted:
+            self._products_list.remove(self)
+            self.IsExisted = False
+        
 
     def get_all_products(self):
         for product in self._products_list :

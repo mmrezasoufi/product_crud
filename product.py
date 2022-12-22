@@ -28,7 +28,7 @@ class Product:
     def __repr__(self):
         return f"Product('{self._id}','{self.title}','{self.description}')"
     
-    def create(self):
+    def add(self):
         if not(self.IsExisted):
             self._products_list.append(self)
             return self.__repr__()
@@ -38,19 +38,23 @@ class Product:
         return self.__repr__()
     
     def update(self, new_product):
+        if new_product.IsExisted:
+            new_product.delete()
         temp = self.IsExisted
         for i in range(len(self._products_list)):
             if self._products_list[i] == self :
                 self._products_list[i] = new_product
                 self = new_product
                 if temp:
-                    self.create()
+                    self.add()
                 return self._products_list[i].__repr__()
                 
     def delete(self):
         if self.IsExisted:
             self._products_list.remove(self)
             self.IsExisted = False
+        else:
+            print(f"This product does not exist in the list")
         
 
     def get_all_products(self):

@@ -2,10 +2,9 @@
 class Product:
     _products_list = list()
 
-    def __init__(self, id:int, title:str, short_description:str, description:str, slug:int, permalink:str, IsAvailable:bool, 
-                 sku:str, price:int, regular_price:int, sale_price:int, manage_stock:int, stock_quantity:int, 
+    def __init__(self, title:str, short_description:str, description:str, slug:int, permalink:str, IsAvailable:bool, 
+                 sku:str, price:int, regular_price:int, sale_price:int, manage_stock:bool, stock_quantity:int, 
                  IsVisible:bool, date_created_gmt, date_modified_gmt):
-        self._id = id
         self.title = title
         self.short_description = short_description
         self.description = description
@@ -26,13 +25,15 @@ class Product:
         
         
     def __repr__(self):
-        return f"Product('{self._id}','{self.title}','{self.description}')"
+        return f"Product('{self.title}','{self.description}')"
     
-    def add(self):
+    def create(self):
         if not(self.IsExisted):
             self._products_list.append(self)
+            self.IsExisted = True
             return self.__repr__()
-        self.IsExisted = True
+        
+        
         
     def read(self):
         return self.__repr__()
@@ -45,8 +46,8 @@ class Product:
             if self._products_list[i] == self :
                 self._products_list[i] = new_product
                 self = new_product
-                if temp:
-                    self.add()
+                if not(temp):
+                    self.create()
                 return self._products_list[i].__repr__()
                 
     def delete(self):
@@ -57,7 +58,7 @@ class Product:
             print(f"This product does not exist in the list")
         
 
-    def get_all_products(self):
+    def list_all(self):
         for product in self._products_list :
             print(product)
             
